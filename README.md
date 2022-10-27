@@ -2,29 +2,20 @@
 
 A Quasar Project
 
-## Install the dependencies
+## Instalar dependencias
 
 ```bash
 yarn
-# or
+# ou
 npm install
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Subir projeto
 
 ```bash
 quasar dev
 ```
-
-### Lint the files
-
-```bash
-yarn lint
-# or
-npm run lint
-```
-
-### Format the files
+### Formatar projeto
 
 ```bash
 yarn format
@@ -32,16 +23,6 @@ yarn format
 npm run format
 ```
 
-### Build the app for production
+# Quasar
 
-```bash
-quasar build
-```
-
-### Customize the configuration
-
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
-
-# Crud-Quasar
-
-# Crud-Quasar
+Projeto com finalidade de estudar a estrutura de composable api do Vue 3 com Quasar
