@@ -1,10 +1,53 @@
 <template>
   <q-page padding>
     <q-table title="Treats" :rows="posts" :columns="columns" row-key="name">
+      <template v-slot:top>
+
+        <span class="text-h5">Artigos</span>
+
+        <q-space/>
+
+        <q-btn color="primary" label="Novo" :to="{ name: 'formPost' }" />
+        <q-btn
+          class="q-ml-sm"
+          color="primary"
+          label="Remove row"
+          @click="removeRow"
+        />
+        <q-space />
+        <q-input
+          borderless
+          dense
+          debounce="300"
+          color="primary"
+          v-model="filter"
+        >
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </template>
+
       <template v-slot:body-cell-actions="props">
-      <q-td :props="props">
-        <q-btn icon="delete" color="negative" dense size="sm" @click="handleDeletePost(props.row.id)"/>
-      </q-td>
+        <q-td :props="props" class="q-gutter-sm">
+         
+        <q-btn
+            icon="edit"
+            color="info"
+            dense
+            size="sm"
+            @click="handleEditPost(props.row.id)"
+          />
+        
+
+        <q-btn
+            icon="delete"
+            color="negative"
+            dense
+            size="sm"
+            @click="handleDeletePost(props.row.id)"
+          />
+          </q-td>
       </template>
     </q-table>
   </q-page>
@@ -13,15 +56,16 @@
 <script>
 import { defineComponent, ref, onMounted } from "vue";
 import postsService from "src/services/posts";
-import { useQuasar } from 'quasar'
+import { useRouter } from "vue-router";
 export default defineComponent({
   name: "IndexPage",
 
   setup() {
-    const $q = useQuasar()
+    const router = useRouter()
 
     const posts = ref([]);
     const { list, remove } = postsService();
+
     const columns = [
       { name: "id", label: "Id", field: "id", align: "left", sortable: true },
       {
@@ -60,28 +104,28 @@ export default defineComponent({
       }
     };
 
+    const handleEditPost = async (id) => {
+      try {
+        router.push({ name: 'formPost', params: { id }})
+      } catch (error) {
+        alert(error);
+      }
+    };
+
     const handleDeletePost = async (id) => {
       try {
-        await remove(id)
-        $q.notify({
-          message: 'Apagado com sucesso',
-          icon: 'check',
-          color: 'positive'
-        })
-         await getPosts()
+        await remove(id);
+        await getPosts();
       } catch (error) {
-        $q.notify({
-          message: 'Erro',
-          icon: 'times',
-          color: 'negative'
-        })
+        alert(error);
       }
-    }
+    };
 
     return {
       posts,
       columns,
       handleDeletePost,
+      handleEditPost,
     };
   },
 });
