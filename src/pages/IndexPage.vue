@@ -7,13 +7,7 @@
 
         <q-space/>
 
-        <q-btn color="primary" label="Novo" :to="{ name: 'formPost' }" />
-        <q-btn
-          class="q-ml-sm"
-          color="primary"
-          label="Remove row"
-          @click="removeRow"
-        />
+        
         <q-space />
         <q-input
           borderless
@@ -23,7 +17,8 @@
           v-model="filter"
         >
           <template v-slot:append>
-            <q-icon name="search" />
+            <q-btn color="primary" label="Novo" :to="{ name: 'formPost' }" />
+        
           </template>
         </q-input>
       </template>
