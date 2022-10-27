@@ -6,12 +6,12 @@ const routes = [
       {
         path: "",
         name: "home",
-        component: () => import("pages/IndexPage.vue"),
+        component: () => import("src/pages/CadPost/IndexPage.vue"),
       },
       {
         path: "form-post/:id?",
         name: "formPost",
-        component: () => import("pages/FormPost.vue"),
+        component: () => import("src/pages/CadPost/FormPost.vue"),
       },
     ],
   },
